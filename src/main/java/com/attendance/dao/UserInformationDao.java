@@ -32,7 +32,7 @@ public class UserInformationDao {
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("SET name=?,department=?,degree=?,sex=?,work=? WHERE account=?");
+            PreparedStatement preStmt = conn.prepareStatement("UPDATE userInformation SET name=?,department=?,degree=?,sex=?,work=? WHERE account=?");
             preStmt.setString(6, userInfo.getAccount());
             preStmt.setString(1, userInfo.getName());
             preStmt.setString(2, userInfo.getDepartment());
