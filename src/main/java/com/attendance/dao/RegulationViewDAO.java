@@ -27,10 +27,14 @@ public class RegulationViewDAO {
                 regulationView.setExitTime(resultSet.getLong(4));
                 regulationViews.add(regulationView);
             }
-            return (RegulationView[]) regulationViews.toArray();
+            RegulationView regulationViewRes[] = new RegulationView[regulationViews.size()];
+            regulationViews.toArray(regulationViewRes);
+            return regulationViewRes;
         }catch (Exception e)
         {
             throw new RuntimeException(e);
+        }finally {
+            DB.close(conn,resultSet);
         }
     }
     public static RegulationView findRegulation(String name)

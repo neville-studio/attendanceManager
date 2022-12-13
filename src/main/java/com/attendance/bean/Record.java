@@ -1,19 +1,29 @@
 package com.attendance.bean;
 
-public class record {
+public class Record {
     private String account;
-    private String comeTime;
-    private String exitTime;
+    private long comeTime;
+    private long exitTime;
     private int status;
+    private long date;
 
-    public record() {
+    public long getDate() {
+        return date;
     }
 
-    public record(String account, String comeTime, String exitTime, int status) {
+    public void setDate(long date) {
+        this.date = date;
+    }
+
+    public Record() {
+    }
+
+    public Record(String account, long comeTime, long exitTime, int status,long date) {
         this.account = account;
         this.comeTime = comeTime;
         this.exitTime = exitTime;
         this.status = status;
+        this.date  = date;
     }
 
     public String getAccount() {
@@ -24,19 +34,19 @@ public class record {
         this.account = account;
     }
 
-    public String getComeTime() {
+    public long getComeTime() {
         return comeTime;
     }
 
-    public void setComeTime(String comeTime) {
+    public void setComeTime(long comeTime) {
         this.comeTime = comeTime;
     }
 
-    public String getExitTime() {
+    public long getExitTime() {
         return exitTime;
     }
 
-    public void setExitTime(String exitTime) {
+    public void setExitTime(long exitTime) {
         this.exitTime = exitTime;
     }
 
