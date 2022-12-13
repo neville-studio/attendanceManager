@@ -1,5 +1,6 @@
 package com.attendance.dao;
 
+import com.attendance.bean.Regulation;
 import com.attendance.bean.UserInformation;
 import com.attendance.util.DB;
 
@@ -9,18 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserInformationDao {
-    public static void insertInfo(UserInformation userInfo)
+public class RegulationDAO {
+    public static void insertInfo(Regulation regulation)
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("INSERT INTO userinformation VALUES (?,?,?,?,?,?)");
-            preStmt.setString(1, userInfo.getAccount());
-            preStmt.setString(2, userInfo.getName());
-            preStmt.setString(3, userInfo.getDepartment());
-            preStmt.setString(4,userInfo.getDegree());
-            preStmt.setBoolean(5,userInfo.isSex());
-            preStmt.setString(6, userInfo.getWork());
+            PreparedStatement preStmt = conn.prepareStatement("INSERT INTO Regulation VALUES (?,?,?)");
+            preStmt.setString(1, regulation.getAccount());
+            preStmt.setLong(2, regulation.getComeTime());
+            preStmt.setLong(3, regulation.getExitTime());
             preStmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -30,17 +28,14 @@ public class UserInformationDao {
         }
 
     }
-    public static void editInfo(UserInformation userInfo)
+    public static void editInfo(Regulation regulation)
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("UPDATE userInformation SET name=?,department=?,degree=?,sex=?,work=? WHERE account=?");
-            preStmt.setString(6, userInfo.getAccount());
-            preStmt.setString(1, userInfo.getName());
-            preStmt.setString(2, userInfo.getDepartment());
-            preStmt.setString(3,userInfo.getDegree());
-            preStmt.setBoolean(4,userInfo.isSex());
-            preStmt.setString(5, userInfo.getWork());
+            PreparedStatement preStmt = conn.prepareStatement("UPDATE FROM attendance SET comeTime=?,ExitTime=? WHERE account=?");
+            preStmt.setString(3, regulation.getAccount());
+            preStmt.setLong(1, regulation.getComeTime());
+            preStmt.setLong(2, regulation.getExitTime());
             preStmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -68,12 +63,11 @@ public class UserInformationDao {
     public UserInformation[] getUsersInfo(String name)
     {
         ArrayList<UserInformation> userInformationArrayList = new ArrayList<>();
-        ResultSet res = null;
         Connection conn = DB.getConnection();
         try {
             PreparedStatement preStmt = conn.prepareStatement("SELECT * FROM userInformation WHERE name LIKE ?");
             preStmt.setString(1, "%" + name + "%");
-            res = preStmt.executeQuery();
+            ResultSet res = preStmt.executeQuery();
             while(res.next())
             {
                 UserInformation userInfo = new UserInformation();
@@ -91,7 +85,7 @@ public class UserInformationDao {
             throw new RuntimeException(e);
         }finally
         {
-            DB.close(conn,res);
+            DB.close(conn,null);
         }
     }
 
