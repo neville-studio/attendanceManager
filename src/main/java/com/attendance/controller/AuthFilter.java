@@ -18,9 +18,12 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        if(httpServletRequest.getSession(false).getAttribute("user_type")==null&&!httpServletRequest.getLocalAddr().equals("index.jsp")&&!httpServletRequest.getLocalAddr().equals("/Auth"))
+        if(httpServletRequest.getSession(false).getAttribute("user_type")==null&&!httpServletRequest.getLocalAddr().equals("/index.jsp")&&!httpServletRequest.getLocalAddr().equals("/Auth"))
         {
             httpServletResponse.sendRedirect("/index.jsp");
+        }else if(httpServletRequest.getSession(false).getAttribute("user_type")!=null&&httpServletRequest.getLocalAddr().equals("/index.jsp"))
+        {
+            httpServletResponse.sendRedirect("/homepage");
         }
         chain.doFilter(request, response);
     }
