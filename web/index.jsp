@@ -15,31 +15,38 @@
       }
       body{
         height: 100%;
+        margin: 0;
       }
       .loginFrame
       {
         width:300px;
-        height:200px;
+        height: 200px;
         position: absolute;
-        left:calc(100% - 300px);
-        top:calc(100% - 200px);
+        left:calc(100% / 2 - 150px);
+        top:calc(100% / 2 - 100px);
+        border:1px solid gray;
+        border-radius: 8px;
+        text-align: center;
       }
       .inputText
       {
-        width:150px;
+        width:100%;
+        height:40px;
+        margin: 8px auto;
       }
     </style>
   </head>
   <body>
   <div class="loginFrame">
     <form method="post">
-    <table class="loginTable">
+    <table class="loginTable" width="100%">
+      <caption>请先登录</caption>
       <tr>
     <td>account</td>
-    <td><input type="text"></td></tr>
+    <td><input type="text" class="inputText"></td></tr>
     <tr>
       <td>password</td>
-    <td><input type="text"></td></tr></table>
+    <td><input type="text" class="inputText"></td></tr></table>
       <div class="tip" id="tips"></div>
       <input type="submit">
     </form>
