@@ -7,14 +7,15 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 @WebServlet(name = "AuthServlet", value = "/Auth")
 public class AuthServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/plain");
-        response.getOutputStream().print("{\"status\":\"不支持此请求方式！\"}");
+        response.setContentType("text/plain;charset=utf-8");
+        response.getWriter().print("{\"status\":\"不支持此请求方式！\"}");
     }
 
     @Override
@@ -26,12 +27,14 @@ public class AuthServlet extends HttpServlet {
         {
             response.sendError(200);
             response.setContentType("text/plain");
-
-            response.getOutputStream().println("{\"status\":\"登录失败，用户名或密码错误\"}");
+            response.getWriter().println("{\"status\":\"登录失败，用户名或密码错误\"}");
+            response.sendRedirect("/index.jsp");
+            return;
         }else {
             request.getSession().setAttribute("account",account);
             request.getSession().setAttribute("user_type",status);
-            response.sendRedirect("");
+            response.sendRedirect("/homepage.jsp");
+            return;
         }
 
     }
