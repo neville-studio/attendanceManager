@@ -85,8 +85,9 @@ public class UserInformationDao {
                 userInfo.setWork(res.getString(6));
                 userInformationArrayList.add(userInfo);
             }
-
-            return (UserInformation[]) userInformationArrayList.toArray();
+            UserInformation[] result=new UserInformation[userInformationArrayList.size()];
+            userInformationArrayList.toArray(result);
+            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally
