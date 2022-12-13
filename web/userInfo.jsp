@@ -10,33 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <style>
-      .table
-      {
-        margin: 0 10%;
-        width:80%;
-      }
-      .table tr
-      {
-        height:40px;
-      }
-      .section
-      {
-        display: inline-block;
-        width:80%;
-        margin: 0 auto;
-        text-align: center;
-        border:1px solid #ddd;
-        box-shadow: 5px 5px 50px #aaa;
-        border-radius: 4px;
-        background-image: linear-gradient(60deg,rgba(218, 169, 215, 0.3),rgba(128, 174, 235, 0.426));
-        backdrop-filter: opacity(75%);
-      }
-      body
-      {
-        text-align: center;
-      }
-    </style>
+  <link rel="stylesheet" href="StyleSheet/controls.css">
 </head>
 <%!
   UserInformation userInfo ;
@@ -65,7 +39,7 @@
       </tr>
       <tr>
         <td>性别</td>
-        <td><%=userInfo==null&&userInfo.isSex()?"男":"女"%></td>
+        <td><%=userInfo!=null&&userInfo.isSex()?"男":"女"%></td>
       </tr>
       <tr>
         <td>工作</td>

@@ -10,68 +10,60 @@
 <html>
 <head>
   <title>Title</title>
-  <style>
-    .table
-    {
-      margin: 0 10%;
-      width:80%;
-    }
-    .table tr
-    {
-      height:40px;
-    }
-    .section
-    {
-      display: inline-block;
-      width:80%;
-      margin: 0 auto;
-      text-align: center;
-      border:1px solid #ddd;
-      box-shadow: 5px 5px 50px #aaa;
-      border-radius: 4px;
-      background-image: linear-gradient(60deg,rgba(218, 169, 215, 0.3),rgba(128, 174, 235, 0.426));
-      backdrop-filter: opacity(75%);
-    }
-    body
-    {
-      text-align: center;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="StyleSheet/controls.css">
 </head>
 <%!
   UserInformation userInfo ;
 %>
 <%
   userInfo= UserInformationDao.getUserInfo(request.getSession().getAttribute("account").toString());
+  if(userInfo.getDegree()==null)userInfo.setDegree("null");
 %>
 <body>
 <div class="section">
+  <form method="post" action="/EditUser">
   <table class="table">
     <tr>
       <td width="75px">账号</td>
-      <td><%=userInfo.getAccount()%></td>
+      <td><input class="inputText" type="text" value="<%=userInfo.getAccount()%>" name="account" readonly></td>
     </tr>
     <tr>
       <td>姓名</td>
-      <td><%=userInfo.getName()%></td>
+      <td><input class="inputText" type="text" value="<%=userInfo.getName()%>" name="name"></td>
     </tr>
     <tr>
       <td>部门</td>
-      <td><%=userInfo.getDepartment()%></td>
+      <td><input class="inputText" type="text" value="<%=userInfo.getDepartment()%>" name="department"></td>
     </tr>
     <tr>
       <td>学历</td>
-      <td><%=userInfo.getDegree()%></td>
+      <td>
+        <select class="inputText" name="degree" id="">
+          <option value="null" <%=userInfo.getDegree().equals("null")?"selected":""%>>请选择</option>
+        <option value="小学" <%=userInfo.getDegree().equals("小学")?"selected":""%>>小学</option>
+        <option value="初中" <%=userInfo.getDegree().equals("初中")?"selected":""%>>初中</option>
+        <option value="高中" <%=userInfo.getDegree().equals("高中")?"selected":""%>>高中</option>
+        <option value="中专" <%=userInfo.getDegree().equals("中专")?"selected":""%>>中专</option>
+        <option value="大专" <%=userInfo.getDegree().equals("大专")?"selected":""%>>大专</option>
+        <option value="本科" <%=userInfo.getDegree().equals("本科")?"selected":""%>>本科</option>
+        <option value="硕士" <%=userInfo.getDegree().equals("硕士")?"selected":""%>>硕士</option>
+        <option value="博士" <%=userInfo.getDegree().equals("博士")?"selected":""%>>博士</option>
+      </select></td>
     </tr>
     <tr>
       <td>性别</td>
-      <td><%=userInfo==null&&userInfo.isSex()?"男":"女"%></td>
+      <td><input  type="radio" name="sex" value="true" <%=userInfo!=null&&userInfo.isSex()?"checked":""%> id="male"><label for="male">男</label>
+        <input type="radio" name="sex" value="false" <%=userInfo!=null&&!userInfo.isSex()?"checked":""%> id="female"><label for="female">女</label>
+      </td>
     </tr>
     <tr>
       <td>工作</td>
-      <td><%=userInfo.getWork()%></td>
+      <td><input class="inputText" type="text" value="<%=userInfo.getWork()%>" name="work"></td>
     </tr>
   </table>
+    <button type="submit" class="inputbutton">修改</button>
+  </form>
 </div>
 </body>
 </html>

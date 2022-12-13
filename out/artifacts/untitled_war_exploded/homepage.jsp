@@ -16,17 +16,29 @@
     <div class="title">
 <%--        <div class="menu">--%>
             <div class="left">
-            <div class="item" onclick="document.getElementById('info').setAttribute('src','userInfo.jsp')">首页</div>
+            <div class="item" id="userInfo">首页</div>
             <div class="item">查询记录</div>
             <div class="item">管理人员</div>
             <div class="item">管理签到时间</div>
             </div><div class="right">
-            <div class="item"><%=request.getSession().getAttribute("account").toString()%></div>
+            <div class="item" id="changeUser"><%=request.getSession().getAttribute("account").toString()%></div>
             <div class="item">修改密码</div>
             <div class="item">签到</div>
             <div class="item" onclick="window.location.href='/Logout'">退出</div></div>
 <%--        </div>--%>
     </div>
-    <iframe class="info" src="userInfo.jsp"></iframe>
+    <iframe class="info" id="infoFrame" src="userInfo.jsp"></iframe>
+<script>
+    if(document.getElementById("userInfo")!=null) {
+        document.getElementById("userInfo").addEventListener("click", () => {
+            document.getElementById("infoFrame").setAttribute('src', '/userInfo.jsp');
+        })
+    }
+    if(document.getElementById("changeUser")!=null) {
+        document.getElementById("changeUser").addEventListener("click", () => {
+            document.getElementById("infoFrame").setAttribute('src', '/changeUser.jsp')
+        })
+    }
+</script>
 </body>
 </html>

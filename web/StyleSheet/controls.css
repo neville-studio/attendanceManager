@@ -1,0 +1,43 @@
+.table
+{
+    margin: 0 10%;
+    width:80%;
+}
+.table tr
+{
+    height:40px;
+}
+.section
+{
+    display: inline-block;
+    width:80%;
+    margin: 0 auto;
+    text-align: center;
+    border:1px solid #ddd;
+    box-shadow: 5px 5px 50px #aaa;
+    border-radius: 4px;
+    background-image: linear-gradient(60deg,rgba(218, 169, 215, 0.3),rgba(128, 174, 235, 0.426));
+    backdrop-filter: opacity(75%);
+}
+body
+{
+    text-align: center;
+}
+.inputText
+{
+    height: 32px;
+    width: 100%;
+}
+.inputbutton{
+    background-color:#4CA9E7;
+    border:2px solid #4CA9E7;
+    border-radius:  4px;
+    padding:4px 24px;
+    transition-duration: 300ms;
+    color:white;
+}
+.inputbutton:hover
+{
+    background-color:white;
+    color:black;
+}
