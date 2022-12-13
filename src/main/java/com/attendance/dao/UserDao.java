@@ -49,10 +49,11 @@ public class UserDao {
         Connection conn = DB.getConnection();
         PreparedStatement prestmt = null;
         try {
-            prestmt = conn.prepareStatement("UPDATE user SET password=? WHERE user=?");
+            prestmt = conn.prepareStatement("UPDATE user SET password=? WHERE user.user=?");
             prestmt.setString(2,user.getUser());
             prestmt.setString(1,user.getPassword());
             int res = prestmt.executeUpdate();
+
             return res;
         } catch (SQLException e) {
             throw new RuntimeException(e);

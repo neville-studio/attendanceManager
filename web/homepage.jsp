@@ -22,7 +22,7 @@
             <div class="item">管理签到时间</div>
             </div><div class="right">
             <div class="item" id="changeUser"><%=request.getSession().getAttribute("account").toString()%></div>
-            <div class="item">修改密码</div>
+            <div class="item" id="changePw">修改密码</div>
             <div class="item">签到</div>
             <div class="item" onclick="window.location.href='/Logout'">退出</div></div>
 <%--        </div>--%>
@@ -37,6 +37,11 @@
     if(document.getElementById("changeUser")!=null) {
         document.getElementById("changeUser").addEventListener("click", () => {
             document.getElementById("infoFrame").setAttribute('src', '/changeUser.jsp')
+        })
+    }
+    if(document.getElementById("changePw")!=null) {
+        document.getElementById("changePw").addEventListener("click", () => {
+            document.getElementById("infoFrame").setAttribute('src', '/changePassword.jsp')
         })
     }
 </script>
