@@ -18,7 +18,7 @@
             <div class="left">
             <div class="item" id="userInfo">首页</div>
             <div class="item">查询记录</div>
-            <div class="item">管理人员</div>
+            <div class="item" id="managePeople">管理人员</div>
             <div class="item">管理签到时间</div>
             </div><div class="right">
             <div class="item" id="changeUser"><%=request.getSession().getAttribute("account").toString()%></div>
@@ -42,6 +42,11 @@
     if(document.getElementById("changePw")!=null) {
         document.getElementById("changePw").addEventListener("click", () => {
             document.getElementById("infoFrame").setAttribute('src', '/changePassword.jsp')
+        })
+    }
+    if(document.getElementById("managePeople")!=null) {
+        document.getElementById("managePeople").addEventListener("click", () => {
+            document.getElementById("infoFrame").setAttribute('src', '/ManageUser.jsp')
         })
     }
 </script>

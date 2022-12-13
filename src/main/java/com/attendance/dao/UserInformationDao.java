@@ -71,7 +71,7 @@ public class UserInformationDao {
         ResultSet res = null;
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("SELECT * FROM userInformation WHERE name LIKE ?");
+            PreparedStatement preStmt = conn.prepareStatement("SELECT * FROM userInformation WHERE name LIKE ? AND account!='root'");
             preStmt.setString(1, "%" + name + "%");
             res = preStmt.executeQuery();
             while(res.next())

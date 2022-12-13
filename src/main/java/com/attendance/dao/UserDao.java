@@ -42,8 +42,49 @@ public class UserDao {
     }
 
 
+    public static int getUserType(User user)
+    {
+        Connection conn = DB.getConnection();
+        PreparedStatement prestmt = null;
+        ResultSet res = null;
+        try {
+            prestmt = conn.prepareStatement("SELECT * FROM user where user=?;");
+            prestmt.setString(1,user.getUser());
 
+            res = prestmt.executeQuery();
+            if(res.next())
+            {
+                    user.setUser_type(res.getInt("user_type"));
+                    return user.getUser_type();
+            }else{
+                return -1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.close(conn,res);
+        }
+    }
 
+    public static int updateUserType(User user)
+    {
+        Connection conn = DB.getConnection();
+        PreparedStatement prestmt = null;
+        try {
+            prestmt = conn.prepareStatement("UPDATE user SET user_type=? WHERE user.user=?");
+            prestmt.setString(2,user.getUser());
+            prestmt.setInt(1,user.getUser_type());
+            int res = prestmt.executeUpdate();
+
+            return res;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            DB.close(conn,null);
+        }
+
+    }
     public static int updatePassword(User user)
     {
         Connection conn = DB.getConnection();
@@ -76,8 +117,8 @@ public class UserDao {
         PreparedStatement prestmt = null;
         try {
             prestmt = conn.prepareStatement("INSERT  INTO user VALUES (?,'123456',?)");
-            prestmt.setString(1,user.getPassword());
-            prestmt.setString(2,user.getUser());
+            prestmt.setString(1,user.getUser());
+            prestmt.setInt(2,user.getUser_type());
             int res = prestmt.executeUpdate();
             return res;
         } catch (SQLException e) {
@@ -92,7 +133,7 @@ public class UserDao {
         Connection conn = DB.getConnection();
         PreparedStatement prestmt = null;
         try {
-            prestmt = conn.prepareStatement("DELETE user WHERE user=?");
+            prestmt = conn.prepareStatement("DELETE FROM user WHERE user=?");
             prestmt.setString(1,user.getUser());
             int res = prestmt.executeUpdate();
             return res;
