@@ -15,13 +15,16 @@ public class UserDao {
         PreparedStatement prestmt = null;
         ResultSet res = null;
         try {
-            prestmt = conn.prepareStatement("SELECT * FROM user where user=?");
+            prestmt = conn.prepareStatement("SELECT * FROM user where user.user=?");
             prestmt.setString(1,user.getUser());
+
             res = prestmt.executeQuery();
             if(res.next())
             {
                 if(res.getString("password").equals(user.getPassword())){
                     user.setUser_type(res.getInt("user_type"));
+
+
                     return user.getUser_type();
                 }else {
                     return -1;
