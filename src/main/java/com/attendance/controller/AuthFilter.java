@@ -18,12 +18,17 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        if(httpServletRequest.getSession(false).getAttribute("user_type")==null&&!httpServletRequest.getLocalAddr().equals("/index.jsp")&&!httpServletRequest.getLocalAddr().equals("/Auth"))
+
+        if((httpServletRequest.getSession(false)==null||httpServletRequest.getSession(false).getAttribute("user_type")==null)&&!httpServletRequest.getRequestURI().equals("/index.jsp")&&!httpServletRequest.getRequestURI().equals("/Auth"))
         {
+            System.out.println(httpServletRequest.getRequestURI()+"1：");
             httpServletResponse.sendRedirect("/index.jsp");
-        }else if(httpServletRequest.getSession(false).getAttribute("user_type")!=null&&httpServletRequest.getLocalAddr().equals("/index.jsp"))
+            return;
+        }else if(!(httpServletRequest.getSession(false)==null||httpServletRequest.getSession(false).getAttribute("user_type")==null)&&httpServletRequest.getRequestURI().equals("/index.jsp"))
         {
-            httpServletResponse.sendRedirect("/homepage");
+            System.out.println(httpServletRequest.getRequestURI()+"2:");
+            httpServletResponse.sendRedirect("/homepage.jsp");
+            return;
         }
         chain.doFilter(request, response);
     }

@@ -9,8 +9,33 @@
 <html>
   <head>
     <title>$Title$</title>
+    <style>
+      html{
+        height: 100%;
+      }
+      body{
+        height: 100%;
+      }
+      .loginFrame
+      {
+        width:300px;
+        height:200px;
+      }
+    </style>
   </head>
   <body>
-  $END$
+  <div class="loginFrame">
+    <form method="post">
+    <table class="loginTable">
+      <tr>
+    <td>account</td>
+    <td><input type="text"></td></tr>
+    <tr>
+      <td>password</td>
+    <td><input type="text"></td></tr></table>
+      <div class="tip" id="tips"></div>
+      <input type="submit">
+    </form>
+  </div>
   </body>
 </html>
