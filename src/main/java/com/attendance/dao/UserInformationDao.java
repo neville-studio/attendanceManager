@@ -86,6 +86,7 @@ public class UserInformationDao {
                 userInformationArrayList.add(userInfo);
             }
             UserInformation[] result=new UserInformation[userInformationArrayList.size()];
+
             userInformationArrayList.toArray(result);
             return result;
         } catch (SQLException e) {
@@ -96,8 +97,32 @@ public class UserInformationDao {
         }
     }
 
-    public static UserInformation getUserInfo(String name)
+    public static UserInformation getUserInfo(String account)
     {
-        return getUsersInfo(name)[0];
+        UserInformation userInfo = new UserInformation();
+        ResultSet res = null;
+        Connection conn = DB.getConnection();
+        try {
+            PreparedStatement preStmt = conn.prepareStatement("SELECT * FROM userInformation WHERE account=?");
+            preStmt.setString(1, account);
+            res = preStmt.executeQuery();
+            if(res.next())
+            {
+                userInfo.setAccount(res.getString(1));
+                userInfo.setName(res.getString(2));
+                userInfo.setDepartment(res.getString(3));
+                userInfo.setDegree(res.getString(4));
+                userInfo.setSex(res.getBoolean(5));
+                userInfo.setWork(res.getString(6));
+
+            }
+            return userInfo;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally
+        {
+            DB.close(conn,res);
+        }
+
     }
 }
