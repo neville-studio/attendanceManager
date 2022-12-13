@@ -65,7 +65,7 @@ public class UserInformationDao {
             DB.close(conn,null);
         }
     }
-    public UserInformation[] getUsersInfo(String name)
+    public static UserInformation[] getUsersInfo(String name)
     {
         ArrayList<UserInformation> userInformationArrayList = new ArrayList<>();
         ResultSet res = null;
@@ -95,7 +95,7 @@ public class UserInformationDao {
         }
     }
 
-    public UserInformation getUserInfo(String name)
+    public static UserInformation getUserInfo(String name)
     {
         return getUsersInfo(name)[0];
     }
