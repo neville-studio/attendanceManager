@@ -20,6 +20,13 @@
       {
         width:300px;
         height:200px;
+        position: absolute;
+        left:calc(100% - 300px);
+        top:calc(100% - 200px);
+      }
+      .inputText
+      {
+        width:150px;
       }
     </style>
   </head>
