@@ -61,9 +61,9 @@ public class RecordDao {
             {
                 Record record = new Record();
                 record.setAccount(resultSet.getString(1));
-                record.setStatus(resultSet.getInt(2));
-                record.setComeTime(resultSet.getLong(3));
-                record.setExitTime(resultSet.getLong(4));
+                record.setStatus(resultSet.getInt(4));
+                record.setComeTime(resultSet.getLong(2));
+                record.setExitTime(resultSet.getLong(3));
                 record.setDate(resultSet.getLong(5));
                 records.add(record);
             }
@@ -80,5 +80,33 @@ public class RecordDao {
     public static Record findRecord(String name)
     {
         return findRecords(name)[0];
+    }public static Record getRecord(String user,long date)
+    {
+        Connection conn = DB.getConnection();
+        ResultSet resultSet = null;
+        try
+        {
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM record WHERE account=? AND Date=?");
+            preparedStatement.setString(1,user);
+            preparedStatement.setLong(2,date);
+            resultSet=preparedStatement.executeQuery();
+            Record record = null;
+            if(resultSet.next())
+            {
+                record = new Record();
+                record.setAccount(resultSet.getString(1));
+                record.setStatus(resultSet.getInt(4));
+                record.setComeTime(resultSet.getLong(2));
+                record.setExitTime(resultSet.getLong(3));
+                record.setDate(resultSet.getLong(5));
+            }
+            return record;
+        }catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }finally {
+            DB.close(conn,resultSet);
+        }
     }
+
 }

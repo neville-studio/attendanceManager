@@ -111,7 +111,7 @@ public class UserDao {
         return updatePassword(user);
 
     }
-    public static int createUser(User user)
+    public static int createUser(User user) throws RuntimeException
     {
         Connection conn = DB.getConnection();
         PreparedStatement prestmt = null;

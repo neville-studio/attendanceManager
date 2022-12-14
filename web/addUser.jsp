@@ -64,6 +64,13 @@
         </select></td>
     </tr>
   </table>
+    <div>
+      &nbsp;
+      <%
+        if(request.getParameter("errorType")!=null)
+          out.print("该账号已注册。");
+      %>
+    </div>
     <button type="submit" class="inputbutton" name="method" value="add">添加</button>
 
   </form>

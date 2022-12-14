@@ -33,11 +33,22 @@ public class UserControlServlet extends HttpServlet {
         String user_type=request.getParameter("userType");
         String method=request.getParameter("method");
         if(method.equals("add"))
-        {UserDao.createUser(new User(account,"123456",Integer.parseInt(user_type)));
-        UserInformationDao.insertInfo(new UserInformation(account,name,department,degree,sex.equals("true"),work));
-        RegulationDAO.insertInfo(new Regulation(account,0,0));}else if(method.equals("edit")){
+        {
+            try{
+            UserDao.createUser(new User(account,"123456",Integer.parseInt(user_type)));
+        UserInformationDao.insertInfo(new UserInformation(account,name,department,degree,sex==null||sex.equals("true"),work));
+        RegulationDAO.insertInfo(new Regulation(account,0,0));}
+        catch(RuntimeException e)
+        {
+            response.sendRedirect("/addUser.jsp?errorType=1");
+            return;
+        }
+
+        }
+
+        else if(method.equals("edit")){
             UserDao.updateUserType(new User(account,"123456",Integer.parseInt(user_type)));
-            UserInformationDao.editInfo(new UserInformation(account,name,department,degree,sex.equals("true"),work));
+            UserInformationDao.editInfo(new UserInformation(account,name,department,degree,sex==null||sex.equals("true"),work));
         }
         response.sendRedirect("/ManageUser.jsp");
     }

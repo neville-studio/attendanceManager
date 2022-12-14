@@ -36,7 +36,7 @@
       </tr>
       <tr>
         <td>姓名</td>
-        <td><input class="inputText" type="text" value="<%=regulation.getName()%>" name="name"></td>
+        <td><input readonly class="inputText" type="text" value="<%=regulation.getName()%>" name="name"></td>
       </tr>
       <tr>
         <td>上班时间</td>

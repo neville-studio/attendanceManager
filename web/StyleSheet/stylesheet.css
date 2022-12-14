@@ -51,3 +51,13 @@ body{
 {
     margin: auto 0;
 }
+.disabledItem{
+    display: inline-block;
+    margin:8px;
+    padding: 8px 16px;
+    vertical-align: middle;
+    color:white;
+    border-radius: 4px;
+    /*height: 100%;*/
+
+}
