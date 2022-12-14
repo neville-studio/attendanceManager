@@ -1,16 +1,13 @@
 package com.attendance.controller;
 
 import com.attendance.bean.Regulation;
-import com.attendance.bean.User;
-import com.attendance.bean.UserInformation;
 import com.attendance.dao.RegulationDAO;
-import com.attendance.dao.UserDao;
-import com.attendance.dao.UserInformationDao;
-import sun.java2d.pipe.SpanShapeRenderer;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

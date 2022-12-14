@@ -1,6 +1,9 @@
 package com.attendance.util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DB {
     private static String driver ="com.mysql.cj.jdbc.Driver";

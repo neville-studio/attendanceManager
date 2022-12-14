@@ -1,9 +1,6 @@
 package com.attendance.dao;
 
-import com.attendance.bean.Regulation;
 import com.attendance.bean.Record;
-
-import com.attendance.bean.RegulationView;
 import com.attendance.util.DB;
 
 import java.sql.Connection;
@@ -57,7 +54,7 @@ public class RecordDao {
         ArrayList<Record> records = new ArrayList<>();
         try
         {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM record WHERE name=?");
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM record WHERE account=?");
             preparedStatement.setString(1,name);
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next())

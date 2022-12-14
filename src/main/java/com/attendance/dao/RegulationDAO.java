@@ -1,14 +1,11 @@
 package com.attendance.dao;
 
 import com.attendance.bean.Regulation;
-import com.attendance.bean.UserInformation;
 import com.attendance.util.DB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class RegulationDAO {
     public static void insertInfo(Regulation regulation)
