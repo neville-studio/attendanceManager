@@ -15,7 +15,7 @@ public class RegulationDAO {
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("INSERT INTO Regulation VALUES (?,?,?)");
+            PreparedStatement preStmt = conn.prepareStatement("INSERT INTO regulation VALUES (?,?,?)");
             preStmt.setString(1, regulation.getAccount());
             preStmt.setLong(2, regulation.getComeTime());
             preStmt.setLong(3, regulation.getExitTime());
@@ -32,7 +32,7 @@ public class RegulationDAO {
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("UPDATE attendance SET comeTime=?,ExitTime=? WHERE account=?");
+            PreparedStatement preStmt = conn.prepareStatement("UPDATE regulation SET comeTime=?,ExitTime=? WHERE account=?");
             preStmt.setString(3, regulation.getAccount());
             preStmt.setLong(1, regulation.getComeTime());
             preStmt.setLong(2, regulation.getExitTime());
@@ -49,7 +49,7 @@ public class RegulationDAO {
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("DELETE FROM Regulation WHERE account=?");
+            PreparedStatement preStmt = conn.prepareStatement("DELETE FROM regulation WHERE account=?");
             preStmt.setString(1, regulation.getAccount());
 
             preStmt.execute();
@@ -60,5 +60,18 @@ public class RegulationDAO {
             DB.close(conn,null);
         }
     }
-
+    public static void editInfos(String type, long value)
+    {
+        Connection conn = DB.getConnection();
+        try {
+            PreparedStatement preStmt = conn.prepareStatement("UPDATE regulation SET "+type+"=?");
+            preStmt.setLong(1, value);
+            preStmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally
+        {
+            DB.close(conn,null);
+        }
+    }
 }

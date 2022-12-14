@@ -102,10 +102,15 @@ body
 .datatable tr
 {
     height:40px;
-    border-bottom: 1px solid #e7e7e7;
     transition-duration: 300ms;
 }
 .datatable tr:hover
 {
     background-color: #f0f0f0;
+}
+.datatable td
+{
+    height:40px;
+    border-bottom: 1px solid #e7e7e7;
+    transition-duration: 300ms;
 }
