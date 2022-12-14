@@ -17,9 +17,9 @@
 <%--        <div class="menu">--%>
             <div class="left">
             <div class="item" id="userInfo">首页</div>
-            <div class="item">查询记录</div>
-            <div class="item" id="managePeople">管理人员</div>
-            <div class="item" id="manageAttendance">管理签到时间</div>
+            <div class="item" id="getAllRecords">查询记录</div>
+                <%if(request.getSession().getAttribute("user_type").toString().equals("2")){%><div class="item" id="managePeople">管理人员</div><%}%>
+                <%if(!request.getSession().getAttribute("user_type").toString().equals("0")){%><div class="item" id="manageAttendance">管理签到时间</div><%}%>
             </div><div class="right">
             <div class="item" id="changeUser"><%=request.getSession().getAttribute("account").toString()%></div>
             <div class="item" id="changePw">修改密码</div>
@@ -54,9 +54,18 @@
             document.getElementById("infoFrame").setAttribute('src', '/ManageAttendance.jsp')
         })
     }
+    if(document.getElementById("getAllRecords")!=null) {
+        document.getElementById("getAllRecords").addEventListener("click", () => {
+            document.getElementById("infoFrame").setAttribute('src', '/recordManage.jsp')
+        })
+    }
+
+
+
+
     let Http = new XMLHttpRequest();
     Http.onreadystatechange = (e) => {
-        let orgData = JSON.parse(''+Http.responseText);
+        let orgData = JSON.parse(Http.responseText);
         console.log(orgData)
         document.getElementById("getTime").innerHTML=orgData.status;
         if(!orgData.enable)document.getElementById("getTime").setAttribute("class","disabledItem");

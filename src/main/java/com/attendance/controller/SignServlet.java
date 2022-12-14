@@ -36,7 +36,7 @@ public class SignServlet extends HttpServlet {
             }
             Record record = RecordDao.getRecord(account,date);
             if(record==null) {
-                RecordDao.insertInfo(new Record(account, -1, -1, 0, date));
+                RecordDao.insertInfo(new Record(account, -28800001L, -28800001L, 0, date));
                 RegulationView nowRegultion = RegulationViewDAO.findRegulationByaccount(account);
                 long timeofDay;
                 try {
@@ -46,12 +46,12 @@ public class SignServlet extends HttpServlet {
                 }
                 if(nowRegultion.getComeTime()>timeofDay ) {
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"未早打卡\"},\"enable\":true}");
+                    response.getWriter().print("{\"status\":\"未签到\",\"enable\":true}");
                     response.setStatus(200);
                 }else if(nowRegultion.getExitTime()<timeofDay)
                 {
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"未晚打卡\",\"enable\":true}");
+                    response.getWriter().print("{\"status\":\"未签退\",\"enable\":true}");
                     response.setStatus(200);
                 }else{
                     response.setCharacterEncoding("UTF-8");
@@ -68,27 +68,27 @@ public class SignServlet extends HttpServlet {
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-                if(record.getComeTime()<0&&nowRegultion.getComeTime()>timeofDay){
+                if(record.getComeTime()<-28800000L&&nowRegultion.getComeTime()>timeofDay){
                     response.setHeader("Content-Type","application/json");
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"未早打卡\",\"enable\":true}");
+                    response.getWriter().print("{\"status\":\"未签到\",\"enable\":true}");
                     response.setStatus(200);
-                }else if(record.getExitTime()<0&& nowRegultion.getExitTime()<timeofDay){
+                }else if(record.getExitTime()<-28800000L&& nowRegultion.getExitTime()<timeofDay){
                     response.setHeader("Content-Type","application/json");
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"未晚打卡\",\"enable\":true}");
+                    response.getWriter().print("{\"status\":\"未签退\",\"enable\":true}");
                     response.setStatus(200);
                 }
-                else if(record.getComeTime()>0&&nowRegultion.getComeTime()>timeofDay)
+                else if(record.getComeTime()>=-28800000L&&nowRegultion.getComeTime()>timeofDay)
                 {
                     response.setContentType("application/json;charset=utf-8");
-                    response.getWriter().print("{\"status\":\"已早打卡\",\"enable\":false}");
+                    response.getWriter().print("{\"status\":\"已签到\",\"enable\":false}");
                     response.setStatus(200);
-                }else if(record.getExitTime()>0&& nowRegultion.getExitTime()<timeofDay)
+                }else if(record.getExitTime()>-28800000L&& nowRegultion.getExitTime()<timeofDay)
                 {
                     //response.getWriter().flush();
                     response.setContentType("application/json;charset=utf-8");
-                    response.getWriter().print("{\"status\":\"已晚打卡\",\"enable\":false}");
+                    response.getWriter().print("{\"status\":\"已签退\",\"enable\":false}");
                     //response.setStatus(200);
 
                     //
@@ -96,7 +96,7 @@ public class SignServlet extends HttpServlet {
                 {
                     response.setHeader("Content-Type","application/json");
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"不可打卡\",\"enable\":false}");
+                    response.getWriter().print("{\"status\":\"不可签到\",\"enable\":false}");
                     response.setStatus(200);
                 }
             }
@@ -109,7 +109,7 @@ public class SignServlet extends HttpServlet {
             }
             Record record = RecordDao.getRecord(account,date);
             if(record==null) {
-                RecordDao.insertInfo(new Record(account, -1, -1, 0, date));
+                RecordDao.insertInfo(new Record(account, -28800001, -28800001, 0, date));
                 RegulationView nowRegultion = RegulationViewDAO.findRegulationByaccount(account);
                 long timeofDay;
                 try {
@@ -119,12 +119,12 @@ public class SignServlet extends HttpServlet {
                 }
                 if(nowRegultion.getComeTime()>timeofDay ) {
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"未早打卡\"},\"enable\":true}");
+                    response.getWriter().print("{\"status\":\"未签到\",\"enable\":true}");
                     response.setStatus(200);
                 }else if(nowRegultion.getExitTime()<timeofDay)
                 {
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"未晚打卡\",\"enable\":true}");
+                    response.getWriter().print("{\"status\":\"未签退\",\"enable\":true}");
                     response.setStatus(200);
                 }else{
                     response.setCharacterEncoding("UTF-8");
@@ -136,19 +136,19 @@ public class SignServlet extends HttpServlet {
                 RegulationView nowRegultion = RegulationViewDAO.findRegulationByaccount(account);
                 long timeofDay;
                 try {
-                    timeofDay = new SimpleDateFormat("HH:mm:ss.SSS").parse(new SimpleDateFormat("HH:mm:ss.SSS").format(new Date().getTime())).getTime();
+                    timeofDay = new SimpleDateFormat("HH:mm:ss.SSS").parse(new SimpleDateFormat("HH:mm:ss.SSS").format(new Date())).getTime();
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
-                }if(nowRegultion.getComeTime()>timeofDay && record.getComeTime()<0 ) {
+                }if(nowRegultion.getComeTime()>timeofDay && record.getComeTime()<-28800000L ) {
                     RecordDao.editInfo(new Record(account,timeofDay, record.getExitTime(), record.getStatus(), record.getDate()));
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"打卡成功\"},\"enable\":false}");
+                    response.getWriter().print("{\"status\":\"签到成功\",\"enable\":false}");
                     response.setStatus(200);
                 }else if(nowRegultion.getExitTime()<timeofDay)
                 {
                     RecordDao.editInfo(new Record(account, record.getComeTime(), timeofDay, record.getStatus(), record.getDate()));
                     response.setCharacterEncoding("UTF-8");
-                    response.getWriter().print("{\"status\":\"打卡成功\",\"enable\":false}");
+                    response.getWriter().print("{\"status\":\"签退成功\",\"enable\":false}");
                     response.setStatus(200);
                 }
 

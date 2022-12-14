@@ -33,9 +33,9 @@ public class RecordDao {
     {
         Connection conn = DB.getConnection();
         try {
-            PreparedStatement preStmt = conn.prepareStatement("UPDATE record SET comeTime=?,ExitTime=?,status=?,Date=? WHERE account=?");
-            preStmt.setString(5, record.getAccount());
-            preStmt.setLong(4, record.getDate());
+            PreparedStatement preStmt = conn.prepareStatement("UPDATE record SET comeTime=?,ExitTime=?,status=? WHERE account=? And Date=?");
+            preStmt.setString(4, record.getAccount());
+            preStmt.setLong(5, record.getDate());
 
             preStmt.setInt(3, record.getStatus());
             preStmt.setLong(1, record.getComeTime());
@@ -77,6 +77,10 @@ public class RecordDao {
             DB.close(conn,resultSet);
         }
     }
+
+
+
+
     public static Record findRecord(String name)
     {
         return findRecords(name)[0];

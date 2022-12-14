@@ -37,7 +37,7 @@ public class UserControlServlet extends HttpServlet {
             try{
             UserDao.createUser(new User(account,"123456",Integer.parseInt(user_type)));
         UserInformationDao.insertInfo(new UserInformation(account,name,department,degree,sex==null||sex.equals("true"),work));
-        RegulationDAO.insertInfo(new Regulation(account,0,0));}
+        if(user_type.equals("0")){RegulationDAO.insertInfo(new Regulation(account,0,0));}}
         catch(RuntimeException e)
         {
             response.sendRedirect("/addUser.jsp?errorType=1");
