@@ -30,6 +30,38 @@ public class AuthFilter implements Filter {
             httpServletResponse.sendRedirect("/homepage.jsp");
             return;
         }
+        int user_type;
+        try{
+         user_type = Integer.parseInt(httpServletRequest.getSession().getAttribute("user_type").toString());}catch (Exception e){
+            user_type = 0;
+        }
+        switch(httpServletRequest.getRequestURI())
+        {
+            case "/ManageAttendance.jsp":
+            case "/editAttendance.jsp":
+                if(user_type==0){
+                    httpServletResponse.sendRedirect("/homepage.jsp");
+                    return;
+                }
+                break;
+            case "/ManageUser.jsp":
+            case "/ManageAttendance":
+            case "/addUser.jsp":
+            case "/editUser.jsp":
+            case "/Manage":
+            case "/UserControl":
+                if(user_type!=2){
+                    httpServletResponse.sendRedirect("/homepage.jsp");
+                    return;
+                }
+                break;
+            case "/Sign":
+                if(user_type!=0){
+                    httpServletResponse.sendRedirect("/homepage.jsp");
+                    return;
+                }
+                break;
+        }
         chain.doFilter(request, response);
     }
 }

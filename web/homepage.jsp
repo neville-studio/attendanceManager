@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>您好，<%=request.getSession().getAttribute("account").toString()%></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="StyleSheet/stylesheet.css">
 </head>
