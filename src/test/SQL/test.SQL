@@ -76,5 +76,5 @@ from
         join `attendance`.`record` on
         ((`attendance`.`record`.`account` = `attendance`.`userinformation`.`account`)));
 
-INSERT user VALUES ('user','123456','2');
-INSERT userinformation(account) VALUES ('user');
+INSERT user VALUES ('root','123456','2');
+INSERT userinformation(account) VALUES ('root');

@@ -54,7 +54,7 @@ public class RecordDao {
         ArrayList<Record> records = new ArrayList<>();
         try
         {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM record WHERE account=?");
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM record WHERE account=? ORDER BY Date DESC");
             preparedStatement.setString(1,name);
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next())

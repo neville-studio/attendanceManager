@@ -16,7 +16,7 @@ public class RecordViewDao {
         ArrayList<RecordView> records = new ArrayList<>();
         try
         {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM recordview WHERE name like ?");
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM recordview WHERE name like ? ORDER BY date DESC");
             preparedStatement.setString(1,"%"+q+"%");
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next())
