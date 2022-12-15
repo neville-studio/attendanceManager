@@ -64,7 +64,6 @@ public class SignServlet extends HttpServlet {
                 long timeofDay;
                 try {
                     timeofDay = new SimpleDateFormat("HH:mm:ss.SSS").parse(new SimpleDateFormat("HH:mm:ss.SSS").format(new Date().getTime())).getTime();
-                    System.out.println(record.getExitTime());
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }

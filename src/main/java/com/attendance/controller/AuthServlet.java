@@ -36,7 +36,6 @@ public class AuthServlet extends HttpServlet {
             request.getSession().setAttribute("account",account);
             request.getSession().setAttribute("user_type",status);
 
-            System.out.println("logging...");
 //            response.sendError(200);
 //            response.setContentType("text/plain");
 //            response.getWriter().println("{\"status\":\"登录成功\"}");
