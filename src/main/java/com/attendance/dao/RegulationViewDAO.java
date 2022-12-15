@@ -45,20 +45,20 @@ public class RegulationViewDAO {
     {
         Connection conn = DB.getConnection();
         ResultSet resultSet = null;
+        RegulationView regulationView = null;
         try
         {
             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM editregulation WHERE account= ?");
             preparedStatement.setString(1,account);
             resultSet=preparedStatement.executeQuery();
-            RegulationView regulationView = new RegulationView();
             while(resultSet.next())
             {
+                regulationView = new RegulationView();
                 regulationView.setAccount(resultSet.getString(1));
                 regulationView.setName(resultSet.getString(2));
                 regulationView.setComeTime(resultSet.getLong(3));
                 regulationView.setExitTime(resultSet.getLong(4));
             }
-
             return regulationView;
         }catch (Exception e)
         {
