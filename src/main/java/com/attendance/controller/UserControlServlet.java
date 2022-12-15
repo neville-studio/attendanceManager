@@ -49,6 +49,8 @@ public class UserControlServlet extends HttpServlet {
         else if(method.equals("edit")){
             UserDao.updateUserType(new User(account,"123456",Integer.parseInt(user_type)));
             UserInformationDao.editInfo(new UserInformation(account,name,department,degree,sex==null||sex.equals("true"),work));
+            if(user_type.equals("0")){RegulationDAO.insertInfo(new Regulation(account,0,0));}
+            else {RegulationDAO.deleteInfo(new Regulation(account,0,0));}
         }
         response.sendRedirect("/ManageUser.jsp");
     }
