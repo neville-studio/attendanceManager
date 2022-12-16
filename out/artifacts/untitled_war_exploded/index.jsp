@@ -10,6 +10,7 @@
   <head>
     <title>您好，请先登录</title>
     <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="image/logo.png" />
     <style>
       html{
         height: 100%;

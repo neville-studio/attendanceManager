@@ -66,8 +66,8 @@
         array[i].addEventListener("click",()=>{
             for(let j=0;j<array.length;j++)
             {
-                array2[i].style.display="none";
-                array[i].style.display="inline-block";
+                array2[j].style.display="none";
+                array[j].style.display="inline-block";
             }
             array[i].style.display="none";
             array2[i].style.display="inline-block";
