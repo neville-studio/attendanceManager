@@ -11,6 +11,7 @@
     <title>您好，<%=request.getSession().getAttribute("account").toString()%></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="StyleSheet/stylesheet.css">
+    <link rel="shortcut icon" type="image/x-icon" href="image/logo.png" />
 </head>
 <body>
     <div class="title">

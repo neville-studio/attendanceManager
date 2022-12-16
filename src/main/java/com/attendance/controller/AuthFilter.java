@@ -24,7 +24,7 @@ public class AuthFilter implements Filter {
 
             httpServletResponse.sendRedirect("/index.jsp");
             return;
-        }else if(!(httpServletRequest.getSession(false)==null||httpServletRequest.getSession(false).getAttribute("user_type")==null)&&httpServletRequest.getRequestURI().equals("/index.jsp"))
+        }else if(!(httpServletRequest.getSession(false)==null||httpServletRequest.getSession(false).getAttribute("user_type")==null)&&(httpServletRequest.getRequestURI().equals("/index.jsp")||httpServletRequest.getRequestURI().equals("/")))
         {
 
             httpServletResponse.sendRedirect("/homepage.jsp");
