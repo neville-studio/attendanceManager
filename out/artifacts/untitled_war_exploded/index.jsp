@@ -16,6 +16,8 @@
       }
       body{
         height: 100%;
+        user-select: none;
+        -webkit-user-select: none;
         margin: 0;
         background-image: linear-gradient(60deg,rgba(218, 169, 215, 0.637),rgba(128, 174, 235, 0.904));
       }
@@ -68,7 +70,7 @@
     <td><input type="text" class="inputText" name="account"></td></tr>
     <tr>
       <td>密码</td>
-      <td><input type="password" class="inputText" value="登录" name="password"></td></tr></table>
+      <td><input type="password" class="inputText" value="" name="password"></td></tr></table>
       <div class="tip" id="tips">&nbsp;
         <%
           String result = request.getParameter("errortype");

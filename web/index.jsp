@@ -16,6 +16,8 @@
       }
       body{
         height: 100%;
+        user-select: none;
+        -webkit-user-select: none;
         margin: 0;
         background-image: linear-gradient(60deg,rgba(218, 169, 215, 0.637),rgba(128, 174, 235, 0.904));
       }

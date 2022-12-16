@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .title
 {
     height:50px;
@@ -19,6 +20,8 @@ html{
 }
 body{
     margin:0;
+    user-select: none;
+    -webkit-user-select: none;
 }
 .item{
     display: inline-block;
