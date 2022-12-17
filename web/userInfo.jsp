@@ -1,5 +1,10 @@
 <%@ page import="com.attendance.bean.UserInformation" %>
-<%@ page import="com.attendance.dao.UserInformationDao" %><%--
+<%@ page import="com.attendance.dao.UserInformationDao" %>
+<%@ page import="com.attendance.bean.Regulation" %>
+<%@ page import="com.attendance.dao.RegulationViewDAO" %>
+<%@ page import="com.attendance.bean.RegulationView" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: 28407
   Date: 2022/12/13
@@ -46,6 +51,22 @@
         <td><%=userInfo.getWork()%></td>
       </tr>
     </table>
+</div>
+<%
+  RegulationView regulation = RegulationViewDAO.findRegulationByaccount(userInfo.getAccount());
+%>
+<div style="height: 50px"></div>
+<div class="section">
+  <table class="table">
+    <tr>
+      <td width="150px">设定签到时间</td>
+      <td><%=new SimpleDateFormat("HH:mm").format(new Date(regulation.getComeTime()))%></td>
+    </tr>
+    <tr>
+      <td>设定签退时间</td>
+      <td><%=new SimpleDateFormat("HH:mm").format(new Date(regulation.getExitTime()))%></td>
+    </tr>
+  </table>
 </div>
 </body>
 </html>
