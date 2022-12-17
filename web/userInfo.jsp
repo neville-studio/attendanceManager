@@ -53,6 +53,7 @@
     </table>
 </div>
 <%
+  if(request.getSession().getAttribute("user_type").toString().equals("0")){
   RegulationView regulation = RegulationViewDAO.findRegulationByaccount(userInfo.getAccount());
 %>
 <div style="height: 50px"></div>
@@ -68,5 +69,6 @@
     </tr>
   </table>
 </div>
+<%}%>
 </body>
 </html>
