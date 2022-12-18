@@ -38,6 +38,7 @@ public class AuthFilter implements Filter {
         switch(httpServletRequest.getRequestURI())
         {
             case "/ManageAttendance.jsp":
+            case "/ManageAttendance":
             case "/editAttendance.jsp":
                 if(user_type==0){
                     httpServletResponse.sendRedirect("/homepage.jsp");
@@ -45,7 +46,6 @@ public class AuthFilter implements Filter {
                 }
                 break;
             case "/ManageUser.jsp":
-            case "/ManageAttendance":
             case "/addUser.jsp":
             case "/editUser.jsp":
             case "/Manage":
